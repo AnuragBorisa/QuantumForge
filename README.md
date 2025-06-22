@@ -1,2 +1,3 @@
-# QFin-qGAN Project
-This repository will house a quantum GAN project for modeling financial distributions.
+## Project Vision
+
+qFin-qGAN is a hybrid quantum–classical framework designed to learn and reproduce complex financial return distributions using a quantum generative adversarial network. By leveraging parameterized quantum circuits to model probability amplitudes and classical neural networks for discrimination, this project aims to push the frontier of quantitative finance—enabling more accurate option pricing, risk assessment, and portfolio simulation. It exists to demonstrate the practical advantage of quantum machine learning in capturing non-Gaussian features of asset returns that classical methods struggle to represent.  
