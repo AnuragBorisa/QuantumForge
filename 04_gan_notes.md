@@ -22,7 +22,7 @@
 3. Alternate for N epochs
 
 ## 5. Training Loop (pseudocode)
-\`\`\`python
+```python
 for epoch in range(num_epochs):                                  
     # ───────────────────────────────────────────────────────────
     # “Each epoch” = one full pass over all our homework (the dataset)
@@ -60,10 +60,11 @@ for epoch in range(num_epochs):
         loss_D.backward()                                      
         # “calculate exactly which rubric rules to tweak (gradients)”
         
-        # f) Teacher updates its checkig strategy 
+        # f) Teacher updates its checking strategy
         optimD.step()                                          
         # “apply the margin notes to rewrite the rubric”
-        With the new rubric in place, the teacher is now better at spotting which guesses are truly good or bad.
+        # “With the new rubric in place, the teacher is now better
+        #  at spotting which guesses are truly good or bad.”
 
         # 2) Train the Student (Generator G)
         # ────────────────────────────────────────────────────────
@@ -95,9 +96,8 @@ for epoch in range(num_epochs):
 
     # ───────────────────────────────────────────────────────────
     # Optional: Show how far both have come this epoch
-    # e.g. print(loss_D.item(), loss_G.item()), or sample G(z) to see fake examples
     print(f"End of epoch {epoch+1}: teacher loss={loss_D.item():.3f}, student loss={loss_G.item():.3f}")
-\`\`\`
+```
 
 ## 6. Notes & Observations
 - e.g. “If D gets too strong, G’s gradients vanish; use label smoothing.”  
