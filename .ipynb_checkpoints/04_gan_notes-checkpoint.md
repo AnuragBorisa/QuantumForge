@@ -23,13 +23,6 @@
 
 ## 5. Training Loop (pseudocode)
 \`\`\`python
-# — Assume we already have:
-#    G        = Generator (the “student” guessing the real data)
-#    D        = Discriminator (the “teacher” grading guesses)
-#    optimG   = Optimizer for G (helps the student learn)
-#    optimD   = Optimizer for D (helps the teacher refine the rubric)
-#    BCE      = Binary Cross-Entropy loss (penalty for wrong grading)
-
 for epoch in range(num_epochs):                                  
     # ───────────────────────────────────────────────────────────
     # “Each epoch” = one full pass over all our homework (the dataset)
@@ -104,7 +97,6 @@ for epoch in range(num_epochs):
     # Optional: Show how far both have come this epoch
     # e.g. print(loss_D.item(), loss_G.item()), or sample G(z) to see fake examples
     print(f"End of epoch {epoch+1}: teacher loss={loss_D.item():.3f}, student loss={loss_G.item():.3f}")
-
 \`\`\`
 
 ## 6. Notes & Observations
