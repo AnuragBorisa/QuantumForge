@@ -49,8 +49,9 @@ Real data → Discriminator D → loss
 
 * **Sampling step**
 
-  1. Measure the circuit many times to draw bin indices $j$ according to probabilities $p_\theta[j]$.
-  2. Map each index $j$ to its real-valued bucket midpoint (e.g. index 3 → value 3.5).
+  1. **Measurement = sampling** — run the generator circuit for _N_ shots (e.g. 100). Each shot collapses to one basis index \(j_k\), giving you your fake samples directly.
+  2. *(Continuous targets only)* Map each index \(j_k\) to its midpoint \(m_{j_k}\) (e.g. index 3 → 4.375) to convert discrete bins into real-valued data.
+
 
 * **Discriminator**
 
