@@ -1,6 +1,6 @@
 import numpy as np
 from qiskit import transpile
-
+from qiskit import QuantumCircuit
 class QuantumGenerator:
 
     def __init__(self, num_qubits, ansatz, sim):
@@ -8,6 +8,15 @@ class QuantumGenerator:
         self.ansatz     = ansatz
         self.sim        = sim 
         self.params     = None 
+
+    def build_circuit(self,theta)->QuantumCircuit:
+        self.set_parameters(theta)
+
+        qc:QuantumCircuit = self.ansatz.assign_parameters(self.params)
+
+        qc.measure_all()
+
+        return qc 
 
     def set_parameters(self, theta):
         theta = np.array(theta)
@@ -30,12 +39,10 @@ class QuantumGenerator:
                 "Parameters not set; call set_parameters() or random_parameters() first."
             )
 
-        # bind the numeric parameters
-        bound_qc = self.ansatz.assign_parameters(self.params)
-        # add measurements so memory slots exist
-        bound_qc.measure_all()
+        qc = self.build_circuit(self.params)
+        
 
-        qc_t = transpile(bound_qc, self.sim)
+        qc_t = transpile(qc, self.sim)
         job  = self.sim.run(qc_t, shots=shots, memory=True)
         result     = job.result()
         bitstrings = result.get_memory()
