@@ -1,0 +1,9 @@
+ClassicalDiscriminator(
+  (net): Sequential(
+    (0): Linear(in_features=8, out_features=16, bias=True)
+    (1): LeakyReLU(negative_slope=0.2)
+    (2): Linear(in_features=16, out_features=1, bias=True)
+    (3): Sigmoid()
+  )
+)
+Total parameters: 161
