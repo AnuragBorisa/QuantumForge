@@ -137,13 +137,14 @@ CRZ(λ) = CX • RZ(λ on target) • CX
 
 Keep this page handy; read top‑to‑bottom once and you’ll refresh the whole picture in minutes.
 
+
 # ZZ and RZZ — Parity & Gate Action (Notes Section)
 
 ## 1) Why (Z\otimes Z) gives (+1) (even parity) and (-1) (odd parity)
 
 Single-qubit Pauli-(Z) is
 [
-Z = \begin{bmatrix}1 & 0\ 0 & -1\end{bmatrix},\quad Z\lvert0\rangle = +\lvert0\rangle,; Z\lvert1\rangle = -\lvert1\rangle.
+Z = \begin{bmatrix}1 & 0\ 0 & -1\end{bmatrix},\qquad Z\lvert0\rangle = +\lvert0\rangle,; Z\lvert1\rangle = -\lvert1\rangle.
 ]
 So (\lvert0\rangle) is a (+1) eigenstate, (\lvert1\rangle) is a (-1) eigenstate.
 
@@ -204,6 +205,7 @@ R_{ZZ}(\theta)=\operatorname{diag}\big(\mathrm{e}^{-i\theta/2},, \mathrm{e}^{+i\
 ]
 
 **Special note for (\lvert00\rangle):** the phase (\mathrm{e}^{-i\theta/2}) is **global** if (\lvert00\rangle) is the only component; global phase has no observable effect. The gate’s effect becomes physical when there is superposition over even and odd parity, creating a **relative phase** between them.
+
 
 
 # Intuition: Pre-rotation → Entangler → Post-rotation (Parity Lever)
