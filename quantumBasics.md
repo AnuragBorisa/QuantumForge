@@ -204,3 +204,89 @@ R_{ZZ}(\theta)=\operatorname{diag}\big(\mathrm{e}^{-i\theta/2},, \mathrm{e}^{+i\
 ]
 
 **Special note for (\lvert00\rangle):** the phase (\mathrm{e}^{-i\theta/2}) is **global** if (\lvert00\rangle) is the only component; global phase has no observable effect. The gate’s effect becomes physical when there is superposition over even and odd parity, creating a **relative phase** between them.
+
+
+Intuition: Pre-rotation → Entangler → Post-rotation (Parity Lever)
+
+One-line takeaway: After entangling, the qubits are linked. A single local rotation (like RY on one qubit) becomes a lever on a joint property (parity), shifting probability between the even set {|00⟩, |11⟩} and the odd set {|01⟩, |10⟩}.
+
+Why each step exists
+
+Pre-rotation (e.g., RY on control): creates superposition so the entangler has two branches to act on. Without it (starting from |00⟩), CNOT/CZ often does nothing observable.
+
+Entangler (CNOT/CZ/RZZ): ties amplitudes across qubits (creates correlation). After RY₀ → CNOT, the state sits entirely in the even subspace: cos(a)|00⟩ + sin(a)|11⟩.
+
+Post-rotation (RY on one qubit): a non-commuting local rotation that mixes Z-basis populations, spilling weight from even → odd. This is the parity mixer.
+
+Minimal math snapshot (for RY₀ → CNOT → RY₁)
+
+Let a = θ₁/2, b = θ₂/2. After the block:
+
+P₀₀ = cos²a · cos²b, P₀₁ = cos²a · sin²b
+
+P₁₀ = sin²a · sin²b, P₁₁ = sin²a · cos²b
+
+Even vs odd split: P_even = cos²b, P_odd = sin²b
+
+Expectation: ⟨Z⊗Z⟩ = P_even − P_odd = cos(θ₂) — independent of θ₁.
+
+Set θ₂ = π ⇒ P_odd = 1 ⇒ ⟨ZZ⟩ = −1.
+
+Key commutation fact
+
+RY does not commute with Z, so it changes Z-basis probabilities (mixes 0↔1). RZ commutes with Z and cannot change Z probabilities — it won’t move even↔odd weight.
+
+Mental models
+
+“Parity rooms” + dimmer knob: post RY is the door between even/odd rooms with an opening controlled by θ₂.
+
+“Phase → probability” converter: phase-type entanglers (CZ/RZZ) create relative phases; post RY turns those into Z-basis population differences you can measure.
+
+“One-qubit lever on a two-qubit property”: entanglement makes a local rotation steer a joint statistic (parity).
+
+Practical notes
+
+For pure ZZ minimization from |00⟩, you could skip entangling and prepare an odd basis state directly (e.g., RY₁(π) → |01⟩). We keep the full block because real Hamiltonians are sums of terms (ZZ + XX + fields) that require correlations.
+
+Equivalent builds: use CZ instead of CNOT (up to H on target), or RZZ(φ) sandwiched by basis changes (e.g., H⊗H → RZZ(φ) → H⊗H).
+
+Tiny exercise (to verify intuition)
+
+Fix any θ₁; sweep θ₂ ∈ [0, π]. Record P_odd = P₀₁ + P₁₀. You should observe P_odd = sin²(θ₂/2) and ⟨ZZ⟩ = cos(θ₂).
+
+
+
+
+Ansatz design — the parity lever recipe (quick notes)
+
+Goal: minimize ⟨Z⊗Z⟩ by pushing probability from even {00, 11} to odd {01, 10}.
+
+Pre-rotation (e.g., RY on control)
+
+Purpose: create superposition so the entangler can act on two branches.
+
+Without this from |00>, CNOT/CZ often has no observable effect.
+
+Entangler (CNOT/CZ/RZZ)
+
+Purpose: tie amplitudes across qubits so a single local change can steer a joint property (parity).
+
+After RY on control then CNOT, the state sits in the even subspace: cos(a)|00> + sin(a)|11>.
+
+Post-rotation (RY or RX on one qubit)
+
+Purpose: parity mixer; it does not commute with Z, so it moves weight between even and odd sets.
+
+This is the single effective knob that actually changes the even↔odd split before Z measurement.
+
+Minimal math snapshot (for RY on q0 → CNOT → RY on q1):
+
+Let a = θ1/2, b = θ2/2.
+
+P_even = cos^2(b), P_odd = sin^2(b).
+
+⟨Z⊗Z⟩ = P_even − P_odd = cos(θ2). Set θ2 = π → ⟨ZZ⟩ = −1.
+
+Mental model:
+
+Think of even/odd as two rooms; the post RY is the door with a dimmer knob (θ2) that controls how much probability flows into the odd room.
