@@ -138,74 +138,85 @@ CRZ(λ) = CX • RZ(λ on target) • CX
 Keep this page handy; read top‑to‑bottom once and you’ll refresh the whole picture in minutes.
 
 
-# ZZ and RZZ — Parity & Gate Action (Notes Section)
+# ZZ and RZZ — Parity & Gate Action (plain Markdown)
 
-## 1) Why (Z\otimes Z) gives (+1) (even parity) and (-1) (odd parity)
+## 1) Why Z⊗Z gives +1 (even parity) and −1 (odd parity)
 
-Single-qubit Pauli-(Z) is
-[
-Z = \begin{bmatrix}1 & 0\ 0 & -1\end{bmatrix},\qquad Z\lvert0\rangle = +\lvert0\rangle,; Z\lvert1\rangle = -\lvert1\rangle.
-]
-So (\lvert0\rangle) is a (+1) eigenstate, (\lvert1\rangle) is a (-1) eigenstate.
+Single-qubit Pauli-Z:
 
-For two qubits, (Z\otimes Z) acts as “apply (Z) on the first qubit and (Z) on the second.” On a computational-basis state (\lvert ab\rangle) with (a,b\in{0,1}):
-[
-(Z\otimes Z)\lvert ab\rangle = (Z\lvert a\rangle)\otimes(Z\lvert b\rangle) = \lambda_a,\lambda_b,\lvert ab\rangle,
-]
-where (\lambda_0=+1), (\lambda_1=-1).
+```
+Z = [[1, 0],
+     [0,-1]]
+```
 
-Therefore the eigenvalue is the **product** of the single-qubit signs:
+Eigenaction:
 
-* (\lvert00\rangle): (+1\times+1=+1)
-* (\lvert11\rangle): ((-1)\times(-1)=+1)
-* (\lvert01\rangle): (+1\times(-1)=-1)
-* (\lvert10\rangle): ((-1)\times+1=-1)
+```
+Z|0> = +|0>
+Z|1> = -|1>
+```
 
-“Even parity” (both equal: 00 or 11) (\Rightarrow +1).
-“Odd parity” (different: 01 or 10) (\Rightarrow -1).
+So |0> is a +1 eigenstate, |1> is a −1 eigenstate.
 
-Matrix view (basis order (\lvert00\rangle,\lvert01\rangle,\lvert10\rangle,\lvert11\rangle)):
-[
-Z\otimes Z = \operatorname{diag}(+1,-1,-1,+1).
-]
+Two qubits:
+
+```
+(Z⊗Z)|ab> = (Z|a>) ⊗ (Z|b>) = (λ_a λ_b)|ab>,  where λ_0=+1, λ_1=−1.
+```
+
+Therefore the eigenvalue is the **product** of single‑qubit signs:
+
+* |00>: (+1)×(+1) = +1
+* |11>: (−1)×(−1) = +1
+* |01>: (+1)×(−1) = −1
+* |10>: (−1)×(+1) = −1
+
+Even parity (00,11) ⇒ +1.  Odd parity (01,10) ⇒ −1.
+
+Matrix view (basis order |00>,|01>,|10>,|11>):
+
+```
+Z⊗Z = diag(+1, −1, −1, +1)
+```
 
 ---
 
-## 2) How to apply a two-qubit gate like (R_{ZZ}(\theta)) to (\lvert00\rangle)
+## 2) How to apply a two‑qubit gate RZZ(θ) to |00>
 
-**Definition:**
-[
-R_{ZZ}(\theta) = \exp!\Big(-i,\tfrac{\theta}{2}, Z\otimes Z\Big).
-]
+Definition:
 
-**Key trick:** ((Z\otimes Z)^2=I). For any matrix (A) with (A^2=I),
-[
-\mathrm{e}^{-i\alpha A} = \cos\alpha, I - i,\sin\alpha, A.
-]
-Here (A=Z\otimes Z), (\alpha=\theta/2). So
-[
-R_{ZZ}(\theta) = \cos!\Big(\tfrac{\theta}{2}\Big), (I\otimes I) ;-
-; i,\sin!\Big(\tfrac{\theta}{2}\Big), (Z\otimes Z).
-]
+```
+RZZ(θ) = exp( −i * (θ/2) * (Z⊗Z) )
+```
 
-Because computational-basis states are eigenstates of (Z\otimes Z), (R_{ZZ}(\theta)) just multiplies each basis state by a phase (\mathrm{e}^{-i(\theta/2),\lambda}) where (\lambda\in{+1,-1}) is that state’s eigenvalue:
+Key identity (since (Z⊗Z)^2 = I):
 
-* (\lvert00\rangle) (eigenvalue (+1)):
-  [ R_{ZZ}(\theta)\lvert00\rangle = \mathrm{e}^{-i\theta/2},\lvert00\rangle. ]
-* (\lvert11\rangle) (eigenvalue (+1)):
-  [ R_{ZZ}(\theta)\lvert11\rangle = \mathrm{e}^{-i\theta/2},\lvert11\rangle. ]
-* (\lvert01\rangle) (eigenvalue (-1)):
-  [ R_{ZZ}(\theta)\lvert01\rangle = \mathrm{e}^{+i\theta/2},\lvert01\rangle. ]
-* (\lvert10\rangle) (eigenvalue (-1)):
-  [ R_{ZZ}(\theta)\lvert10\rangle = \mathrm{e}^{+i\theta/2},\lvert10\rangle. ]
+```
+exp(−i α A) = cos(α) * I  −  i sin(α) * A,   when A^2 = I
+```
 
-Matrix form (same basis order) makes this explicit:
-[
-R_{ZZ}(\theta)=\operatorname{diag}\big(\mathrm{e}^{-i\theta/2},, \mathrm{e}^{+i\theta/2},, \mathrm{e}^{+i\theta/2},, \mathrm{e}^{-i\theta/2}\big).
-]
+Take A = Z⊗Z and α = θ/2, then
 
-**Special note for (\lvert00\rangle):** the phase (\mathrm{e}^{-i\theta/2}) is **global** if (\lvert00\rangle) is the only component; global phase has no observable effect. The gate’s effect becomes physical when there is superposition over even and odd parity, creating a **relative phase** between them.
+```
+RZZ(θ) = cos(θ/2) * (I⊗I)  −  i sin(θ/2) * (Z⊗Z)
+```
 
+Action on computational basis (each is an eigenstate of Z⊗Z):
+
+```
+RZZ(θ)|00> = e^(−i θ/2) |00>   (even parity → +1 phase)
+RZZ(θ)|11> = e^(−i θ/2) |11>
+RZZ(θ)|01> = e^(+i θ/2) |01>   (odd parity  → −1 phase)
+RZZ(θ)|10> = e^(+i θ/2) |10>
+```
+
+Matrix form (basis |00>,|01>,|10>,|11>):
+
+```
+RZZ(θ) = diag( e^(−i θ/2),  e^(+i θ/2),  e^(+i θ/2),  e^(−i θ/2) )
+```
+
+Special note: applying RZZ(θ) to a **pure** |00> only adds a **global phase** e^(−i θ/2), which is not observable. The gate’s effect becomes physical when the state has superposition across even/odd parity (so the relative phase matters).
 
 
 # Intuition: Pre-rotation → Entangler → Post-rotation (Parity Lever)
